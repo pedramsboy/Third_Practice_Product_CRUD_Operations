@@ -15,6 +15,7 @@ use App\Middleware\ActivateSession;
 use App\Controllers\Profile;
 use App\Middleware\RequireLogin;
 use App\Controllers\GoogleAuthentication;
+use App\Middleware\ParsePatchFormData;
 
 $app->group('', function (RouteCollectorProxy $group) {
 
@@ -43,7 +44,12 @@ $app->group('', function (RouteCollectorProxy $group) {
 
         $group->get('/products/{id:[0-9]+}', Products::class . ':show');
 
-        $group->patch('/products/{id:[0-9]+}', Products::class . ':update');
+        // Update product data (without file) - PATCH
+        $group->patch('/products/{id:[0-9]+}', Products::class . ':update')
+        ->add(ParsePatchFormData::class);
+
+        // Update product file - POST
+        $group->post('/products/{id:[0-9]+}/file', Products::class . ':updateFile');
 
         $group->delete('/products/{id:[0-9]+}', Products::class . ':delete');
 
@@ -51,3 +57,8 @@ $app->group('', function (RouteCollectorProxy $group) {
 
 })->add(RequireAPIKey::class)
  ->add(AddJsonResponseHeader::class);
+
+$app->get('/api/products/{id:[0-9]+}/file', Products::class . ':getFile')
+    ->add(GetProduct::class)
+    ->add(RequireAPIKey::class)
+;

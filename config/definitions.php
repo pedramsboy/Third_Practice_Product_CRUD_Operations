@@ -7,6 +7,7 @@ use Google\Client;
 use App\Repositories\UserRepository;
 use App\Controllers\GoogleAuthentication;
 use Psr\Container\ContainerInterface;
+use App\Repositories\FileService;
 
 return [
 
@@ -38,5 +39,9 @@ return [
         return new GoogleAuthentication(
             $c->get(GoogleAuth::class)
         );
-    }
+    },
+
+    FileService::class => function() {
+        return new FileService();
+    },
 ];
