@@ -66,3 +66,21 @@ ALTER TABLE `product_test`
 ADD COLUMN `file_path` VARCHAR(255) NULL AFTER `file_name`,
 ADD COLUMN `file_type` VARCHAR(100) NULL AFTER `file_path`,
 ADD COLUMN `file_size` INT NULL AFTER `file_type`;
+
+
+//add_logging_table
+
+USE product_db;
+CREATE TABLE logs (
+                      id INT AUTO_INCREMENT PRIMARY KEY,
+                      level VARCHAR(50) NOT NULL, -- error, warning, info, success, etc.
+                      message TEXT NOT NULL,
+                      context JSON, -- Additional data as JSON
+                      channel VARCHAR(100) NOT NULL DEFAULT 'app', -- e.g., product, user, auth
+                      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                      user_id INT NULL, -- If you have user authentication
+                      ip_address VARCHAR(45) NULL,
+                      user_agent VARCHAR(255) NULL,
+                      route VARCHAR(255) NULL, -- The API route called
+                      method VARCHAR(10) NULL -- HTTP method
+);
