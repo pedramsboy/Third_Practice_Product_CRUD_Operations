@@ -2,13 +2,13 @@
 
 use App\Database;
 use Slim\Views\PhpRenderer;
-use App\Repositories\GoogleAuth;
+use App\Services\GoogleAuth;
 use Google\Client;
 use App\Repositories\UserRepository;
 use App\Controllers\GoogleAuthentication;
 use Psr\Container\ContainerInterface;
-use App\Repositories\FileService;
-use App\Repositories\LoggerService;
+use App\Services\FileService;
+use App\Services\LoggerService;
 
 
 return [
@@ -46,7 +46,10 @@ return [
     FileService::class => function() {
         return new FileService();
     },
-    LoggerService::class => function(ContainerInterface $c) {
-        return new LoggerService($c->get(Database::class));
+//    LoggerService::class => function(ContainerInterface $c) {
+//        return new LoggerService($c->get(Database::class));
+//    },
+    LoggerService::class => function() {
+        return new LoggerService();
     }
 ];

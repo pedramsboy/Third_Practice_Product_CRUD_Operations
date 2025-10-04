@@ -30,8 +30,6 @@ class RequireAPIKey
             return $response->withStatus(400);
         }
 
-        //if ($params['api-key'] !=='abc123')
-        //if ($request->getHeaderLine('X-API-Key') !== 'abc123') {
             $api_key = $request->getHeaderLine('X-API-Key');
             $api_key_hash = hash_hmac('sha256', $api_key, $_ENV['HASH_SECRET_KEY']);
             $user = $this->repository->find('api_key_hash', $api_key_hash);

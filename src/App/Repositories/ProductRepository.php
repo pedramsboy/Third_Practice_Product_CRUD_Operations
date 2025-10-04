@@ -6,7 +6,7 @@ namespace App\Repositories;
 
 use App\Database;
 use PDO;
-use App\Repositories\LoggerService;
+use App\Services\LoggerService;
 
 class ProductRepository
 {

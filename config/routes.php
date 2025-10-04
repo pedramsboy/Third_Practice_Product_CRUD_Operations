@@ -34,11 +34,26 @@ $app->group('', function (RouteCollectorProxy $group) {
 
 })->add(ActivateSession::class);
 
+
+$app->get('/products/create', function ($request, $response) {
+    $html = file_get_contents(APP_ROOT . '/views/product/create.php');
+    $response->getBody()->write($html);
+    return $response->withHeader('Content-Type', 'text/html');
+});
+
+$app->get('/products', function ($request, $response) {
+    $html = file_get_contents(APP_ROOT . '/views/product/create.php');
+    $response->getBody()->write($html);
+    return $response->withHeader('Content-Type', 'text/html');
+});
+
+$app->post('/api/products', Products::class . ':create');
+
  $app->group('/api', function (RouteCollectorProxy $group) {
 
     $group->get('/products', ProductIndex::class);
 
-    $group->post('/products', Products::class . ':create');
+    //$group->post('/products', Products::class . ':create');
 
     $group->group('', function (RouteCollectorProxy $group) {
 

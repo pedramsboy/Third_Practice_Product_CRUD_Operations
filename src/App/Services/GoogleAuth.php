@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Repositories;
+namespace App\Services;
 
 use Google\Client;
 use Google\Service\Oauth2;
 use Defuse\Crypto\Key;
 use Defuse\Crypto\Crypto;
+use App\Repositories\UserRepository;
 
 class GoogleAuth
 {

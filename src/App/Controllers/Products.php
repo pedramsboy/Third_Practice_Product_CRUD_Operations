@@ -8,8 +8,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Repositories\ProductRepository;
 use Valitron\Validator;
-use App\Repositories\FileService;
-use App\Repositories\LoggerService;
+use App\Services\FileService;
+use App\Services\LoggerService;
 
 class Products
 {
